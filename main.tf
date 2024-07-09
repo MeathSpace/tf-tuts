@@ -10,7 +10,7 @@ terraform {
  
 provider "aws" {
 region  = "eu-north-1"
-profile = "default"
+profile = "sumit"
 shared_config_files      = [ "~/.aws/config"] 
 shared_credentials_files = [ "~/.aws/credentials"] 
 }
