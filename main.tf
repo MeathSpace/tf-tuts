@@ -11,7 +11,7 @@ terraform {
 provider "aws" {
 region  = "eu-north-1"
 profile = "default"
-config = { shared_credentials_files = [ "~/.aws/credentials"] }
+shared_credentials_files = [ "~/.aws/credentials"] 
 }
 
 resource "aws_s3_bucket" "my_s3_bucket" {
