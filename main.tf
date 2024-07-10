@@ -16,6 +16,6 @@ shared_credentials_files = [ "~/.aws/credentials"]
 }
 
 resource "aws_s3_bucket" "my_s3_bucket" {
-  bucket = "samplejenkins"
+  bucket = "samplejenkinsTest"
 }
  
