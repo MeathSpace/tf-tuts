@@ -115,7 +115,7 @@ resource "aws_apigatewayv2_integration" "hello_world_lambda" {
 
   integration_uri    = aws_lambda_function.hello_world_lambda.invoke_arn
   integration_type   = "AWS_PROXY"
-  integration_method = "GET"
+  integration_method = "POST"
 }
 
 resource "aws_apigatewayv2_route" "hello_world_lambda" {
