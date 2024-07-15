@@ -1,8 +1,3 @@
-# import requests
-# import allure
-# import json
-
-# @allure.description("API Test")
 import requests
 import allure
 import json
@@ -25,7 +20,7 @@ def test_apirequest():
     assert response_json["statusCode"] == 200, f"Expected statusCode 200, but got {response_json['statusCode']}"
     
     assert "body" in response_json, "body key missing in response"
-    body = response_json["body"]
+    body = json.loads(response_json["body"])  # Parse the JSON string in body
     
     assert "message" in body, "message key missing in response body"
     assert body["message"] == "success", f"Expected message 'success', but got {body['message']}"
@@ -34,13 +29,13 @@ def test_apirequest():
     assert body["sum"] == 30, f"Expected sum 30, but got {body['sum']}"
 
     assert "diff" in body, "diff key missing in response body"
-    assert body["diff"] == 30, f"Expected diff 30, but got {body['diff']}"
+    assert body["diff"] == 10, f"Expected diff 10, but got {body['diff']}"
 
     assert "multiply" in body, "multiply key missing in response body"
-    assert body["multiply"] == 30, f"Expected multiply 30, but got {body['multiply']}"
+    assert body["multiply"] == 200, f"Expected multiply 200, but got {body['multiply']}"
 
     assert "division" in body, "division key missing in response body"
-    assert body["division"] == 30, f"Expected division 30, but got {body['division']}"
+    assert body["division"] == 2.0, f"Expected division 2.0, but got {body['division']}"
 
 
 # import requests
