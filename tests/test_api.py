@@ -15,23 +15,20 @@ def test_apirequest():
     response_json = resp.json()
     print(response_json)
     
-    assert "body" in response_json, "body key missing in response"
-    body = json.loads(response_json["body"])  # Parse the JSON string in body
+    assert "message" in response_json, "message key missing in response body"
+    assert response_json["message"] == "success", f"Expected message 'success', but got {body['message']}"
     
-    assert "message" in body, "message key missing in response body"
-    assert body["message"] == "success", f"Expected message 'success', but got {body['message']}"
-    
-    assert "sum" in body, "sum key missing in response body"
-    assert body["sum"] == 30, f"Expected sum 30, but got {body['sum']}"
+    assert "sum" in response_json, "sum key missing in response body"
+    assert response_json["sum"] == 30, f"Expected sum 30, but got {body['sum']}"
 
-    assert "diff" in body, "diff key missing in response body"
-    assert body["diff"] == 10, f"Expected diff 10, but got {body['diff']}"
+    assert "diff" in response_json, "diff key missing in response body"
+    assert response_json["diff"] == 10, f"Expected diff 10, but got {body['diff']}"
 
-    assert "multiply" in body, "multiply key missing in response body"
-    assert body["multiply"] == 200, f"Expected multiply 200, but got {body['multiply']}"
+    assert "multiply" in response_json, "multiply key missing in response body"
+    assert response_json["multiply"] == 200, f"Expected multiply 200, but got {body['multiply']}"
 
-    assert "division" in body, "division key missing in response body"
-    assert body["division"] == 2.0, f"Expected division 2.0, but got {body['division']}"
+    assert "division" in response_json, "division key missing in response body"
+    assert response_json["division"] == 2.0, f"Expected division 2.0, but got {body['division']}"
 
 
 # import requests
