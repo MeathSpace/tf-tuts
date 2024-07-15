@@ -1,10 +1,20 @@
+import json
+
 def lambda_handler(event, context):
-    a = 10
+
+     a = 10
     b = 20
     sum = a + b
+    # Example data to include in the response
+    data = {
+        "message": "success",
+        "sum": 30
+    }
 
+    # Construct the JSON response
     response = {
         "statusCode": 200,
-        "body": sum
+        "body": json.dumps(data)  # Convert Python dictionary to JSON string
     }
+
     return response
