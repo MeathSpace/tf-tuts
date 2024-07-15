@@ -1,8 +1,15 @@
 def lambda_handler(event, context):
 
+    a = 10
+    b = 20
+    sum = a+b
+
     response = {
         "statusCode" : 200,
-        "body" : "Perfect Response Reloading Check"
+        "body" : {
+             "message" : "success",
+             "sum" : 30,  
+        }
 
     }
     return response
