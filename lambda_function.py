@@ -5,9 +5,6 @@ def lambda_handler(event, context):
 
     response = {
         "statusCode": 200,
-        "body": {
-            "message": "success",
-            "sum": sum  # Use the computed sum
-        }
+        "body": sum
     }
     return response
