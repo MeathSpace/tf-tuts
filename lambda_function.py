@@ -10,7 +10,6 @@ def lambda_handler(event, context):
 
     # Example data to include in the response
     data = {
-        "statusCode": 200,
         "message": "success",
         "sum": sum_val,  # Use a different variable name to avoid conflicts with built-in function names
         "diff": diff,
@@ -19,7 +18,8 @@ def lambda_handler(event, context):
     }
 
     # Construct the JSON response
-    response = { 
+    response = {
+        "statusCode": 200,
         "body": json.dumps(data)  # Convert Python dictionary to JSON string
     }
 

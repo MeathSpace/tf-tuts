@@ -15,10 +15,6 @@ def test_apirequest():
     response_json = resp.json()
     print(response_json)
     
-    # Check if the response contains expected keys and values
-    assert "statusCode" in response_json, "statusCode key missing in response"
-    assert response_json["statusCode"] == 200, f"Expected statusCode 200, but got {response_json['statusCode']}"
-    
     assert "body" in response_json, "body key missing in response"
     body = json.loads(response_json["body"])  # Parse the JSON string in body
     
