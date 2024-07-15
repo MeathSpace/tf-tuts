@@ -2,13 +2,13 @@ import json
 
 def lambda_handler(event, context):
 
-     a = 10
+    a = 10
     b = 20
     sum = a + b
     # Example data to include in the response
     data = {
         "message": "success",
-        "sum": 30
+        "sum": sum
     }
 
     # Construct the JSON response
