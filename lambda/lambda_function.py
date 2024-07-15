@@ -1,8 +1,8 @@
 def lambda_handler(event, context):
 
     response = {
-        statusCode : 200,
-        body : "Perfect Response"
+        "statusCode" : 200,
+        "body" : "Perfect Response"
 
     }
     return response
