@@ -16,19 +16,19 @@ def test_apirequest():
     print(response_json)
     
     assert "message" in response_json, "message key missing in response body"
-    assert response_json["message"] == "success", f"Expected message 'success', but got {body['message']}"
+    assert response_json["message"] == "success", f"Expected message 'success', but got {response_json['message']}"
     
     assert "sum" in response_json, "sum key missing in response body"
-    assert response_json["sum"] == 40, f"Expected sum 30, but got {body['sum']}"
+    assert response_json["sum"] == 50, f"Expected sum 30, but got {response_json['sum']}"
 
     assert "diff" in response_json, "diff key missing in response body"
-    assert response_json["diff"] == 10, f"Expected diff 10, but got {body['diff']}"
+    assert response_json["diff"] == 10, f"Expected diff 10, but got {response_json['diff']}"
 
     assert "multiply" in response_json, "multiply key missing in response body"
-    assert response_json["multiply"] == 200, f"Expected multiply 200, but got {body['multiply']}"
+    assert response_json["multiply"] == 200, f"Expected multiply 200, but got {response_json['multiply']}"
 
     assert "division" in response_json, "division key missing in response body"
-    assert response_json["division"] == 2.0, f"Expected division 2.0, but got {body['division']}"
+    assert response_json["division"] == 2.0, f"Expected division 2.0, but got {response_json['division']}"
 
 
 # import requests
