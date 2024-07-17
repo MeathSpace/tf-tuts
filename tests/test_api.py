@@ -22,7 +22,7 @@ def test_apirequest():
     assert response_json["sum"] == 30, f"Expected sum 30, but got {response_json['sum']}"
 
     assert "diff" in response_json, "diff key missing in response body"
-    assert response_json["diff"] == -10, f"Expected diff 10, but got {response_json['diff']}"
+    assert response_json["diff"] == 10, f"Expected diff 10, but got {response_json['diff']}"
 
     assert "multiply" in response_json, "multiply key missing in response body"
     assert response_json["multiply"] == 200, f"Expected multiply 200, but got {response_json['multiply']}"
