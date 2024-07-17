@@ -11,7 +11,7 @@ def lambda_handler(event, context):
     # Example data to include in the response
     data = {
         "message": "success",
-        "sum": 40,  # Use a different variable name to avoid conflicts with built-in function names
+        "sum": sum_val,  # Use a different variable name to avoid conflicts with built-in function names
         "diff": diff,
         "multiply": multiply,
         "division": division
