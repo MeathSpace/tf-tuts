@@ -3,7 +3,9 @@ import allure
 import json
 
 @allure.description("API Test")
+
 def test_apirequest():
+    
     # Make a request to your Lambda function endpoint
     url = "https://u9tnio6ui4.execute-api.eu-north-1.amazonaws.com/serverless_lambda_stage/hello"
     resp = requests.get(url)
