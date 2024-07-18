@@ -1,0 +1,115 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = 'us-east-1'
+        ZIP_CREATED = "false"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the source code from your repository
+                git branch: 'main', credentialsId: 'your-credentials-id', url: 'https://github.com/your-repo.git'
+            }
+        }
+
+        stage('Prepare Environment') {
+            steps {
+                script {
+                    // Install necessary tools (assuming a Linux agent with apt-get)
+                    sh 'sudo apt-get update'
+                    sh 'sudo apt-get install -y zip unzip'
+                    sh 'curl -sLo terraform.zip https://releases.hashicorp.com/terraform/1.3.7/terraform_1.3.7_linux_amd64.zip'
+                    sh 'unzip terraform.zip'
+                    sh 'sudo mv terraform /usr/local/bin/'
+                }
+            }
+        }
+
+        stage('Run Shell Script') {
+            steps {
+                script {
+                    // Run the shell script to check for changes and create the zip file
+                    sh './deploy_lambda.sh'
+                    // Load the environment variable from the shell script
+                    script {
+                        def zipStatus = readFile('zip_status.env').trim()
+                        if (zipStatus.contains("ZIP_CREATED=true")) {
+                            env.ZIP_CREATED = "true"
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                script {
+                    if (env.ZIP_CREATED == "true") {
+                        sh 'terraform init'
+                    } else {
+                        echo "Skipping Terraform init as no changes detected."
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    if (env.ZIP_CREATED == "true") {
+                        sh 'terraform apply -auto-approve'
+                    } else {
+                        echo "Skipping Terraform apply as no changes detected."
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                // Archive the Terraform state and zip file if they exist
+                archiveArtifacts artifacts: 'terraform.tfstate', fingerprint: true
+                if (env.ZIP_CREATED == "true") {
+                    archiveArtifacts artifacts: 'my_lambda_function.zip', fingerprint: true
+                }
+            }
+        }
+
+        cleanup {
+            // Clean up workspace
+            cleanWs()
+        }
+    }
+}
+
+
+
+
+
+post {
+        always {
+            script {
+                // Archive the Terraform state and zip file if they exist
+                archiveArtifacts artifacts: 'terraform.tfstate', fingerprint: true
+                if (env.ZIP_CREATED == "true") {
+                    archiveArtifacts artifacts: 'my_lambda_function.zip', fingerprint: true
+                }
+            }
+            echo "Publishing Allure report"
+            archiveArtifacts 'allure-results/'
+            allure([
+                includeProperties: false,
+                jdk: '',
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure-results']]
+            ])
+        }
+        cleanup {
+            // Clean up workspace
+            cleanWs()
+        }
+    }

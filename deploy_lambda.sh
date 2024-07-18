@@ -28,7 +28,11 @@ if [ "$PREVIOUS_HASH" != "$NEW_HASH" ]; then
     cd - || exit
     # Update the hash file
     mv "$NEW_HASH_FILE" "$HASH_FILE"
+    echo "ZIP_CREATED=true" > zip_status.env
+    exit 0  # Exit with 0 indicating zip file was created
 else
     echo "Source code has not changed, skipping zip creation."
     rm "$NEW_HASH_FILE"
+    echo "ZIP_CREATED=false" > zip_status.env
+    exit 0  # Exit with 0 to ensure pipeline continues
 fi
