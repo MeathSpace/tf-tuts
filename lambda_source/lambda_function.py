@@ -1,8 +1,8 @@
 import json
 
 def lambda_handler(event, context):
-    a = 20
-    b = 10
+    a = 10
+    b = 20
     sum_val = a + b
     diff = a - b
     multiply = a * b
