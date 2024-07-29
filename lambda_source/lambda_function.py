@@ -8,6 +8,8 @@ def lambda_handler(event, context):
     multiply = a * b
     division = a / b  # Note: Division will result in a float in Python 3.x
 
+    
+
 
 
     # Example data to include in the response
